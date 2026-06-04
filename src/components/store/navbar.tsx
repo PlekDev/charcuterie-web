@@ -67,9 +67,9 @@ export function Navbar() {
               </span>
             )}
           </Link>
-          <button className="p-2 hover:bg-stone-100/50 rounded-full transition-all active:scale-95 duration-150 text-primary">
+          <Link href="/orders" title="Mis Pedidos" className="p-2 hover:bg-stone-100/50 rounded-full transition-all active:scale-95 duration-150 text-primary">
             <User className="w-5 h-5" />
-          </button>
+          </Link>
           <button
             className="md:hidden p-2 text-primary"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

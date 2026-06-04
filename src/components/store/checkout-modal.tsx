@@ -47,7 +47,7 @@ export function CheckoutModal({ isOpen, onClose, notes }: CheckoutModalProps) {
       // Simulamos un delay de procesamiento de pago
       await new Promise(resolve => setTimeout(resolve, 2000))
 
-      const response = await fetch('/api/sales', {
+      const response = await fetch('/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +57,6 @@ export function CheckoutModal({ isOpen, onClose, notes }: CheckoutModalProps) {
             id: item.id,
             quantity: item.quantity
           })),
-          paymentMethod: 'tarjeta',
           notes: notes
         }),
       })
@@ -65,12 +64,12 @@ export function CheckoutModal({ isOpen, onClose, notes }: CheckoutModalProps) {
       const data = await response.json()
 
       if (data.success) {
-        toast.success('¡Pago completado con éxito!', {
-          description: `Tu pedido ${data.data.folio} ha sido procesado.`
+        toast.success('¡Pedido realizado con éxito!', {
+          description: 'Te llevamos a la confirmación de tu pedido.'
         })
         clearCart()
         onClose()
-        router.push('/market')
+        router.push(`/order/${data.data.id}`)
       } else {
         throw new Error(data.error || 'Error al procesar el pedido')
       }

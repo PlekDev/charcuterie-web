@@ -39,7 +39,7 @@ export default function LandingPage() {
         <section className="relative overflow-hidden pt-12 pb-24 md:pt-24 md:pb-32 px-8">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 z-10">
-              <span className="font-label text-[10px] uppercase tracking-[0.3em] text-secondary mb-6 block">Est. 1984 — Artisanal Quality</span>
+              <span className="font-label text-[10px] uppercase tracking-[0.3em] text-secondary mb-6 block">Desde 1984 — Calidad Artesanal</span>
               <h1 className="font-headline italic text-5xl md:text-7xl lg:text-8xl text-primary leading-[0.9] tracking-tight mb-8">
                 Quesos, Jamones y Embutidos <br/> Gourmet
               </h1>
@@ -49,7 +49,7 @@ export default function LandingPage() {
               <div className="flex flex-wrap gap-4">
                 <Link href="/market">
                   <Button className="px-10 py-7 bg-primary text-on-primary rounded-lg font-label text-xs uppercase tracking-widest hover:brightness-110 transition-all editorial-shadow h-auto">
-                    Explorar Market
+                    Ver Catálogo
                   </Button>
                 </Link>
                 <Link href="/about">
@@ -73,10 +73,10 @@ export default function LandingPage() {
               <div className="absolute -bottom-10 -left-10 hidden md:block bg-surface-container-lowest p-6 rounded-xl editorial-shadow max-w-[240px]">
                 <div className="flex items-center gap-3 mb-4">
                   <Star className="w-4 h-4 text-secondary fill-secondary" />
-                  <span className="font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Best of 2024</span>
+                  <span className="font-label text-[10px] uppercase tracking-wider text-on-surface-variant">PRODUCTO DESTACADO</span>
                 </div>
-                <p className="font-headline italic text-xl text-primary mb-2">Trufa Negra Selection</p>
-                <p className="font-body text-xs text-on-surface-variant">Hand-picked by our Master Sommelier.</p>
+                <p className="font-headline italic text-xl text-primary mb-2">Tabla Gourmet Especial</p>
+                <p className="font-body text-xs text-on-surface-variant">Seleccionado por nuestros expertos en charcutería</p>
               </div>
             </div>
           </div>
@@ -90,7 +90,7 @@ export default function LandingPage() {
                 <h2 className="font-headline text-4xl md:text-5xl text-primary italic mb-6">Categorías Destacadas</h2>
                 <div className="h-px w-24 bg-secondary-fixed-dim"></div>
               </div>
-              <p className="font-body text-on-surface-variant max-w-sm">From the rolling hills of Europe to local craft kitchens, explore our world-class pantry.</p>
+              <p className="font-body text-on-surface-variant max-w-sm">Trabajamos con productores seleccionados para ofrecer quesos, embutidos y especialidades gourmet de la más alta calidad.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
               {/* Large Card */}
@@ -138,7 +138,7 @@ export default function LandingPage() {
                 <div className="absolute bottom-0 left-0 p-8">
                   <h3 className="font-headline italic text-2xl text-on-primary">Tablas Gourmet</h3>
                   <div className="inline-flex items-center gap-2 text-on-primary/80 group-hover:text-on-primary font-label text-[10px] uppercase tracking-[0.2em] mt-2 transition-all">
-                    Daily Bake
+                    Ver Colección
                   </div>
                 </div>
               </Link>
@@ -161,7 +161,7 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="order-1 lg:order-2">
-              <span className="font-label text-[10px] uppercase tracking-widest text-secondary mb-4 block">Product of the Month</span>
+              <span className="font-label text-[10px] uppercase tracking-widest text-secondary mb-4 block">Producto del Mes</span>
               <h2 className="font-headline text-5xl text-primary italic mb-8 leading-tight">Jamón Serrano Reserva <br/> Selección Premium </h2>
               <p className="font-body text-on-surface-variant text-lg mb-8 leading-relaxed">
                 Curado durante más de 18 meses siguiendo métodos tradicionales. Su sabor intenso y textura delicada lo convierten en una de nuestras especialidades más apreciadas.
@@ -169,15 +169,15 @@ export default function LandingPage() {
               <ul className="space-y-4 mb-10">
                 <li className="flex items-center gap-4">
                   <CheckCircle className="w-5 h-5 text-primary" />
-                  <span className="font-label text-xs uppercase tracking-wide text-on-surface">100% Organic & Raw</span>
+                  <span className="font-label text-xs uppercase tracking-wide text-on-surface">Selección Premiumw</span>
                 </li>
                 <li className="flex items-center gap-4">
                   <CheckCircle className="w-5 h-5 text-primary" />
-                  <span className="font-label text-xs uppercase tracking-wide text-on-surface">Sustainable Harvested</span>
+                  <span className="font-label text-xs uppercase tracking-wide text-on-surface">Curación Tradicionald</span>
                 </li>
               </ul>
               <Button className="px-10 py-7 bg-primary text-on-primary rounded-lg font-label text-xs uppercase tracking-widest hover:brightness-110 transition-all editorial-shadow flex items-center gap-4 h-auto">
-                Añadir al Carrito — $24.00
+                Ver Producto
               </Button>
             </div>
           </div>
@@ -188,11 +188,11 @@ export default function LandingPage() {
           <div className="max-w-7xl mx-auto">
             <div className="flex items-end justify-between mb-16">
               <div>
-                <span className="font-label text-[10px] uppercase tracking-widest text-secondary mb-2 block">Our Selection</span>
-                <h2 className="font-headline text-4xl text-primary italic">Featured Products</h2>
+                <span className="font-label text-[10px] uppercase tracking-widest text-secondary mb-2 block">Nuestra Selección</span>
+                <h2 className="font-headline text-4xl text-primary italic">Productos Destacados</h2>
               </div>
               <Link href="/market" className="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2">
-                View All <ArrowRight className="w-3 h-3" />
+                Ver Todo<ArrowRight className="w-3 h-3" />
               </Link>
             </div>
 
@@ -223,9 +223,9 @@ export default function LandingPage() {
         {/* Newsletter Section */}
         <section className="bg-primary py-24 px-8 text-center text-on-primary">
           <div className="max-w-2xl mx-auto">
-            <h2 className="font-headline italic text-4xl md:text-5xl mb-6">Únete a la Familia</h2>
+            <h2 className="font-headline italic text-4xl md:text-5xl mb-6">Recibe Novedades</h2>
             <p className="font-body text-on-primary-container mb-12 opacity-90 leading-relaxed">
-              Subscribe for exclusive early access to our seasonal batches and stories from our partner farms.
+              Suscríbete para recibir promociones, nuevos productos y recomendaciones especiales.
             </p>
             <form className="flex flex-col sm:flex-row gap-4">
               <input

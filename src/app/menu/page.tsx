@@ -116,7 +116,7 @@ export default function MenuPage() {
               </p>
            </div>
            <Link href="/market">
-              <Button className="rounded-full h-14 px-12 bg-on-surface hover:bg-primary transition-all font-bold uppercase tracking-widest text-[10px]">
+              <Button className="rounded-full h-14 px-12 bg-primary text-on-primary hover:bg-primary-container transition-all font-bold uppercase tracking-widest text-[10px]">
                   Ver Catálogo
               </Button>
            </Link>

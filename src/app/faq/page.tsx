@@ -130,7 +130,7 @@ export default function FAQPage() {
            </div>
 
            <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
-              <Button className="rounded-full h-12 px-8 bg-on-surface hover:bg-primary transition-all font-bold uppercase tracking-widest text-[10px] gap-2">
+              <Button className="rounded-full h-12 px-8 bg-primary text-on-primary hover:bg-primary-container transition-all font-bold uppercase tracking-widest text-[10px] gap-2">
                  <Mail className="h-4 w-4" /> Envíanos un correo
               </Button>
               <Button variant="outline" className="rounded-full h-12 px-8 border-black/10 font-bold uppercase tracking-widest text-[10px] gap-2">

@@ -167,7 +167,7 @@ export function CheckoutModal({ isOpen, onClose, notes }: CheckoutModalProps) {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full h-14 rounded-full bg-on-surface hover:bg-primary transition-all font-bold uppercase tracking-[0.2em] text-[10px] shadow-lg"
+              className="w-full h-14 rounded-full bg-primary text-on-primary hover:bg-primary-container transition-all font-bold uppercase tracking-[0.2em] text-[10px] shadow-lg"
             >
               {loading ? (
                 <>

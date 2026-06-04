@@ -71,7 +71,7 @@ export function CheckoutSummary({ notes = '' }: CheckoutSummaryProps) {
 
          <Button
            onClick={() => setIsModalOpen(true)}
-           className="w-full h-14 rounded-full bg-on-surface hover:bg-primary transition-all duration-300 font-bold uppercase tracking-[0.2em] text-[10px] gap-2 mt-4 shadow-lg group"
+           className="w-full h-14 rounded-full bg-primary text-on-primary hover:bg-primary-container transition-all duration-300 font-bold uppercase tracking-[0.2em] text-[10px] gap-2 mt-4 shadow-lg group"
          >
             FINALIZAR PEDIDO <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
          </Button>

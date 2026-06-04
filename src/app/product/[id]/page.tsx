@@ -185,7 +185,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                      <Button
                        disabled={isOutOfStock}
                        onClick={handleAddToCart}
-                       className="flex-1 h-14 bg-on-surface hover:bg-primary transition-all duration-300 rounded-full font-bold uppercase tracking-widest"
+                       className="flex-1 h-14 bg-primary text-on-primary hover:bg-primary-container transition-all duration-300 rounded-full font-bold uppercase tracking-widest"
                      >
                         Añadir al Carrito
                      </Button>

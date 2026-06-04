@@ -49,7 +49,7 @@ export default function CartPage() {
                   <p className="text-muted-foreground text-sm">¿Qué tal si exploras nuestro market y descubres algo delicioso?</p>
                </div>
                <Link href="/market">
-                  <Button className="h-14 px-12 rounded-full bg-on-surface hover:bg-primary transition-all font-bold uppercase tracking-[0.2em] text-[10px]">
+                  <Button className="h-14 px-12 rounded-full bg-primary text-on-primary hover:bg-primary-container transition-all font-bold uppercase tracking-[0.2em] text-[10px]">
                      Ir al Market
                   </Button>
                </Link>

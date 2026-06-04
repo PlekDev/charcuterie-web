@@ -143,7 +143,7 @@ export default function OrderConfirmationPage({ params }: { params: Promise<{ id
               <Button
                 onClick={() => changeStatus(upcoming)}
                 disabled={updating}
-                className="rounded-full bg-on-surface hover:bg-primary gap-2"
+                className="rounded-full bg-primary text-on-primary hover:bg-primary-container gap-2"
               >
                 {updating ? <Loader2 className="h-4 w-4 animate-spin" /> : <ChevronRight className="h-4 w-4" />}
                 Avanzar a: {ORDER_STATUS_LABELS[upcoming]}
@@ -167,7 +167,7 @@ export default function OrderConfirmationPage({ params }: { params: Promise<{ id
 
         <div className="mt-10 flex flex-wrap gap-4 justify-center">
           <Link href="/orders"><Button variant="outline" className="rounded-full px-8">Ver mis pedidos</Button></Link>
-          <Link href="/market"><Button className="rounded-full px-8 bg-on-surface hover:bg-primary">Seguir comprando</Button></Link>
+          <Link href="/market"><Button className="rounded-full px-8 bg-primary text-on-primary hover:bg-primary-container">Seguir comprando</Button></Link>
         </div>
       </main>
 

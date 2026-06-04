@@ -48,7 +48,7 @@ export default function OrdersHistoryPage() {
             </div>
             <p className="text-2xl font-serif italic text-on-surface">Todavía no tienes pedidos.</p>
             <Link href="/market">
-              <Button className="h-12 px-10 rounded-full bg-on-surface hover:bg-primary">Ir al Market</Button>
+              <Button className="h-12 px-10 rounded-full bg-primary text-on-primary hover:bg-primary-container">Ir al Market</Button>
             </Link>
           </div>
         ) : (

@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/db'
+import { supabase, supabaseAdmin, mapProduct, type SupabaseProduct } from '@/lib/supabase'
+
+const PRODUCT_COLUMNS = 'id, name, description, price, category, available, image_url, created_at'
 
 export async function GET(
   request: NextRequest,
@@ -7,75 +9,67 @@ export async function GET(
 ) {
   try {
     const { id } = await params
-    const idInt = parseInt(id)
 
-    if (isNaN(idInt)) {
-      return NextResponse.json({ success: false, error: 'ID de producto inválido' }, { status: 400 })
+    const { data, error } = await supabase
+      .from('products')
+      .select(PRODUCT_COLUMNS)
+      .eq('id', id)
+      .maybeSingle()
+
+    if (error) {
+      console.error('Supabase error fetching product detail:', error)
+      return NextResponse.json({ success: false, error: error.message }, { status: 500 })
     }
 
-    const product = await db.productos.findUnique({
-      where: { id: idInt },
-      include: {
-        categorias: true,
-      },
-    })
-
-    if (!product) {
+    if (!data) {
       return NextResponse.json({ success: false, error: 'Producto no encontrado' }, { status: 404 })
     }
 
-    return NextResponse.json({ success: true, data: product })
+    return NextResponse.json({ success: true, data: mapProduct(data as SupabaseProduct) })
   } catch (error) {
     console.error('Error fetching product detail:', error)
     return NextResponse.json({ success: false, error: 'Error al obtener el producto' }, { status: 500 })
   }
 }
 
+// PATCH - Actualizar producto (admin). Usa service_role para saltar RLS.
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params
-    const idInt = parseInt(id)
-    const body = await request.json()
-
-    if (isNaN(idInt)) {
-      return NextResponse.json({ success: false, error: 'ID de producto inválido' }, { status: 400 })
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { success: false, error: 'Falta SUPABASE_SERVICE_ROLE_KEY en el servidor' },
+        { status: 500 }
+      )
     }
 
-    // Explicitly pick fields to avoid mass assignment security risks
-    const {
-      nombre,
-      descripcion,
-      categoria_id,
-      precio_compra,
-      precio_venta,
-      stock_actual,
-      stock_minimo,
-      imagen_url,
-      activo,
-      visible_web
-    } = body
+    const { id } = await params
+    const body = await request.json()
 
-    const updateData: any = {}
-    if (nombre !== undefined) updateData.nombre = nombre
-    if (descripcion !== undefined) updateData.descripcion = descripcion
-    if (categoria_id !== undefined) updateData.categoria_id = typeof categoria_id === 'string' ? parseInt(categoria_id) : categoria_id
-    if (precio_compra !== undefined) updateData.precio_compra = typeof precio_compra === 'string' ? parseFloat(precio_compra) : precio_compra
-    if (precio_venta !== undefined) updateData.precio_venta = typeof precio_venta === 'string' ? parseFloat(precio_venta) : precio_venta
-    if (stock_actual !== undefined) updateData.stock_actual = typeof stock_actual === 'string' ? parseInt(stock_actual) : stock_actual
-    if (stock_minimo !== undefined) updateData.stock_minimo = typeof stock_minimo === 'string' ? parseInt(stock_minimo) : stock_minimo
-    if (imagen_url !== undefined) updateData.imagen_url = imagen_url
-    if (activo !== undefined) updateData.activo = activo
-    if (visible_web !== undefined) updateData.visible_web = visible_web
+    // Mapea nombres del schema viejo al nuevo y solo toca campos enviados.
+    const updateData: Record<string, unknown> = {}
+    if (body.name !== undefined || body.nombre !== undefined) updateData.name = body.name ?? body.nombre
+    if (body.description !== undefined || body.descripcion !== undefined) updateData.description = body.description ?? body.descripcion
+    if (body.price !== undefined || body.precio_venta !== undefined) updateData.price = Number(body.price ?? body.precio_venta)
+    if (body.category !== undefined || body.categoria_id !== undefined) updateData.category = body.category ?? body.categoria_id
+    if (body.image_url !== undefined || body.imagen_url !== undefined) updateData.image_url = body.image_url ?? body.imagen_url
+    if (body.available !== undefined || body.visible_web !== undefined) updateData.available = body.available ?? body.visible_web
 
-    const updatedProduct = await db.productos.update({
-      where: { id: idInt },
-      data: updateData,
-    })
+    const { data, error } = await supabaseAdmin
+      .from('products')
+      .update(updateData)
+      .eq('id', id)
+      .select(PRODUCT_COLUMNS)
+      .single()
 
-    return NextResponse.json({ success: true, data: updatedProduct })
+    if (error) {
+      console.error('Supabase error updating product:', error)
+      return NextResponse.json({ success: false, error: error.message }, { status: 500 })
+    }
+
+    return NextResponse.json({ success: true, data: mapProduct(data as SupabaseProduct) })
   } catch (error) {
     console.error('Error updating product:', error)
     return NextResponse.json({ success: false, error: 'Error al actualizar producto' }, { status: 500 })

@@ -33,14 +33,14 @@ const deliCategories = [
 
 export default function DeliPage() {
   return (
-    <div className="min-h-screen bg-casita-cream flex flex-col">
+    <div className="min-h-screen bg-surface flex flex-col">
       <Navbar />
       <main className="flex-1 pt-32 pb-24 px-6 max-w-7xl mx-auto w-full">
         <div className="flex flex-col items-center text-center gap-6 mb-20">
            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-casita-terracotta">Selección Gourmet</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Selección Gourmet</span>
            </div>
-           <h1 className="text-5xl md:text-7xl font-serif font-bold text-casita-charcoal">Jamones y Embutidos</h1>
+           <h1 className="text-5xl md:text-7xl font-serif font-bold text-on-surface">Jamones y Embutidos</h1>
            <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed italic mt-4">
                Descubre nuestra selección de jamones, embutidos y especialidades gourmet cuidadosamente seleccionadas.
            </p>
@@ -50,17 +50,17 @@ export default function DeliPage() {
            {deliCategories.map((category) => (
               <div key={category.title} className="group flex flex-col gap-6 p-8 bg-white border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500 rounded-none relative overflow-hidden">
                  <div className="absolute top-0 right-0 p-6">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-casita-terracotta bg-casita-terracotta/10 px-3 py-1 rounded-full">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-3 py-1 rounded-full">
                        {category.count}
                     </span>
                  </div>
-                 <h2 className="text-3xl font-serif font-bold text-casita-charcoal group-hover:text-casita-terracotta transition-colors">
+                 <h2 className="text-3xl font-serif font-bold text-on-surface group-hover:text-secondary transition-colors">
                     {category.title}
                  </h2>
                  <p className="text-muted-foreground leading-relaxed max-w-md">
                     {category.description}
                  </p>
-                 <Link href="/market" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-casita-charcoal group-hover:gap-4 transition-all">
+                 <Link href="/market" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-on-surface group-hover:gap-4 transition-all">
                     Ver productos <ChevronRight className="h-4 w-4" />
                  </Link>
               </div>
@@ -68,24 +68,24 @@ export default function DeliPage() {
         </div>
 
         <div className="mt-32 grid grid-cols-1 lg:grid-cols-3 gap-8">
-           <div className="lg:col-span-2 relative aspect-[21/9] bg-casita-olive overflow-hidden flex items-center p-12">
+           <div className="lg:col-span-2 relative aspect-[21/9] bg-primary overflow-hidden flex items-center p-12">
               <div className="relative z-10 flex flex-col gap-4 text-white max-w-md">
                  <h3 className="text-4xl font-serif font-bold italic">Tablas Personalizadas</h3>
                  <p className="text-white/80 leading-relaxed italic">
                     Diseñamos la combinación perfecta para tus eventos, entregadas listas para disfrutar.
                  </p>
-                 <Button className="w-fit mt-4 bg-white text-casita-olive hover:bg-casita-cream rounded-full px-8 font-bold uppercase tracking-widest text-[10px]">
+                 <Button className="w-fit mt-4 bg-white text-primary hover:bg-surface rounded-full px-8 font-bold uppercase tracking-widest text-[10px]">
                     Cotizar Ahora
                  </Button>
               </div>
               <div className="absolute inset-0 bg-black/20" />
            </div>
-           <div className="bg-casita-terracotta p-12 flex flex-col justify-center gap-6 text-white">
+           <div className="bg-secondary p-12 flex flex-col justify-center gap-6 text-white">
               <h3 className="text-3xl font-serif font-bold">Club Gourmet</h3>
               <p className="text-white/80 text-sm leading-relaxed italic">
                   Recibe mensualmente una selección exclusiva de quesos, embutidos y productos gourmet seleccionados por nuestros expertos.
               </p>
-              <Button variant="outline" className="w-fit border-white text-white hover:bg-white hover:text-casita-terracotta rounded-full px-8 font-bold uppercase tracking-widest text-[10px]">
+              <Button variant="outline" className="w-fit border-white text-white hover:bg-white hover:text-secondary rounded-full px-8 font-bold uppercase tracking-widest text-[10px]">
                  Unirme al Club
               </Button>
            </div>

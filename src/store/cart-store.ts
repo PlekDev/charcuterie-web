@@ -69,7 +69,7 @@ export const useCartStore = create<CartStore>()(
       },
     }),
     {
-      name: 'la-casita-cart',
+      name: 'charcuteria-cart',
     }
   )
 )

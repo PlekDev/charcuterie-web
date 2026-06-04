@@ -71,14 +71,14 @@ const menuSections = [
 
 export default function MenuPage() {
   return (
-    <div className="min-h-screen bg-casita-cream flex flex-col">
+    <div className="min-h-screen bg-surface flex flex-col">
       <Navbar />
       <main className="flex-1 pt-32 pb-24 px-6 max-w-5xl mx-auto w-full">
         <div className="flex flex-col items-center text-center gap-6 mb-20">
            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-casita-terracotta">Quesos Artesanales</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Quesos Artesanales</span>
            </div>
-           <h1 className="text-5xl md:text-7xl font-serif font-bold text-casita-charcoal italic">Quesos Artesanales</h1>
+           <h1 className="text-5xl md:text-7xl font-serif font-bold text-on-surface italic">Quesos Artesanales</h1>
            <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed italic">
                Selección de quesos nacionales e importados cuidadosamente elegidos para nuestros clientes.
            </p>
@@ -87,16 +87,16 @@ export default function MenuPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-16">
            {menuSections.map((section) => (
              <div key={section.title} className="flex flex-col gap-10">
-                <h2 className="text-3xl font-serif font-bold text-casita-olive border-b border-casita-olive/10 pb-4 italic">
+                <h2 className="text-3xl font-serif font-bold text-primary border-b border-primary/10 pb-4 italic">
                    {section.title}
                 </h2>
                 <div className="flex flex-col gap-8">
                    {section.items.map((item) => (
                       <div key={item.name} className="flex flex-col gap-2">
                          <div className="flex justify-between items-baseline gap-4">
-                            <h3 className="text-xl font-serif font-bold text-casita-charcoal">{item.name}</h3>
+                            <h3 className="text-xl font-serif font-bold text-on-surface">{item.name}</h3>
                             <div className="flex-1 border-b border-dotted border-black/20" />
-                            <span className="font-bold text-casita-terracotta">${item.price}</span>
+                            <span className="font-bold text-secondary">${item.price}</span>
                          </div>
                          <p className="text-sm text-muted-foreground leading-relaxed">
                             {item.description}
@@ -110,13 +110,13 @@ export default function MenuPage() {
 
         <div className="mt-32 p-12 bg-white rounded-none border border-black/5 shadow-sm flex flex-col items-center text-center gap-8">
            <div className="flex flex-col gap-2">
-              <h3 className="text-3xl font-serif font-bold text-casita-charcoal">¿Buscas una recomendación personalizada?</h3>
+              <h3 className="text-3xl font-serif font-bold text-on-surface">¿Buscas una recomendación personalizada?</h3>
               <p className="text-muted-foreground text-sm max-w-sm">
                   Te ayudamos a seleccionar los mejores quesos y acompañamientos para cualquier ocasión.
               </p>
            </div>
            <Link href="/market">
-              <Button className="rounded-full h-14 px-12 bg-casita-charcoal hover:bg-casita-olive transition-all font-bold uppercase tracking-widest text-[10px]">
+              <Button className="rounded-full h-14 px-12 bg-on-surface hover:bg-primary transition-all font-bold uppercase tracking-widest text-[10px]">
                   Ver Catálogo
               </Button>
            </Link>

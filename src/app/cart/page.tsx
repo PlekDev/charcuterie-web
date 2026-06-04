@@ -25,17 +25,17 @@ export default function CartPage() {
   const [notes, setNotes] = useState('')
 
   return (
-    <div className="min-h-screen bg-casita-cream flex flex-col">
+    <div className="min-h-screen bg-surface flex flex-col">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-6 max-w-7xl mx-auto w-full">
          <div className="flex items-center gap-4 mb-16">
-            <Link href="/market" className="p-3 bg-white rounded-full border border-black/5 hover:text-casita-terracotta transition-colors shadow-sm group">
+            <Link href="/market" className="p-3 bg-white rounded-full border border-black/5 hover:text-secondary transition-colors shadow-sm group">
                <ArrowLeft className="h-5 w-5 group-hover:-translate-x-1 transition-transform" />
             </Link>
             <div className="flex flex-col gap-2">
-               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-casita-terracotta">Tu Selección</span>
-               <h1 className="text-5xl font-serif font-bold text-casita-charcoal">Mi Carrito</h1>
+               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Tu Selección</span>
+               <h1 className="text-5xl font-serif font-bold text-on-surface">Mi Carrito</h1>
             </div>
          </div>
 
@@ -45,11 +45,11 @@ export default function CartPage() {
                   <ShoppingBasket className="h-10 w-10 text-muted-foreground/30" />
                </div>
                <div className="flex flex-col gap-2">
-                  <p className="text-2xl font-serif italic text-casita-charcoal">Tu carrito se siente un poco vacío.</p>
+                  <p className="text-2xl font-serif italic text-on-surface">Tu carrito se siente un poco vacío.</p>
                   <p className="text-muted-foreground text-sm">¿Qué tal si exploras nuestro market y descubres algo delicioso?</p>
                </div>
                <Link href="/market">
-                  <Button className="h-14 px-12 rounded-full bg-casita-charcoal hover:bg-casita-olive transition-all font-bold uppercase tracking-[0.2em] text-[10px]">
+                  <Button className="h-14 px-12 rounded-full bg-on-surface hover:bg-primary transition-all font-bold uppercase tracking-[0.2em] text-[10px]">
                      Ir al Market
                   </Button>
                </Link>
@@ -74,15 +74,15 @@ export default function CartPage() {
                                    <Image src={item.imageUrl} alt={item.name} fill className="object-cover" />
                                  ) : (
                                    <div className="w-full h-full flex items-center justify-center text-muted-foreground/30 font-serif italic text-xs">
-                                      La Casita
+                                      Charcutería Gourmet
                                    </div>
                                  )}
                               </div>
-                              <h3 className="text-sm font-bold text-casita-charcoal line-clamp-2">{item.name}</h3>
+                              <h3 className="text-sm font-bold text-on-surface line-clamp-2">{item.name}</h3>
                            </div>
 
                            {/* Price */}
-                           <div className="text-right text-sm font-medium text-casita-charcoal">
+                           <div className="text-right text-sm font-medium text-on-surface">
                               ${Number(item.price).toFixed(2)}
                            </div>
 
@@ -90,7 +90,7 @@ export default function CartPage() {
                            <div className="flex flex-col items-center gap-2">
                               <div className="flex items-center bg-white border border-black/10 rounded-md h-10 w-24">
                                  <button
-                                   className="flex-1 flex justify-center hover:text-casita-terracotta disabled:opacity-30"
+                                   className="flex-1 flex justify-center hover:text-secondary disabled:opacity-30"
                                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
                                    disabled={item.quantity <= 1}
                                  >
@@ -98,7 +98,7 @@ export default function CartPage() {
                                  </button>
                                  <span className="flex-1 text-center text-sm font-bold">{item.quantity}</span>
                                  <button
-                                   className="flex-1 flex justify-center hover:text-casita-terracotta disabled:opacity-30"
+                                   className="flex-1 flex justify-center hover:text-secondary disabled:opacity-30"
                                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                    disabled={item.stock !== undefined && item.quantity >= item.stock}
                                  >
@@ -107,14 +107,14 @@ export default function CartPage() {
                               </div>
                               <button
                                 onClick={() => removeItem(item.id)}
-                                className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:text-casita-terracotta flex items-center gap-1 transition-colors"
+                                className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:text-secondary flex items-center gap-1 transition-colors"
                               >
                                  Quitar <X className="h-3 w-3" />
                               </button>
                            </div>
 
                            {/* Total */}
-                           <div className="text-right text-sm font-bold text-casita-charcoal">
+                           <div className="text-right text-sm font-bold text-on-surface">
                               ${(Number(item.price) * item.quantity).toFixed(2)}
                            </div>
                         </div>
@@ -129,7 +129,7 @@ export default function CartPage() {
                      </label>
                      <Textarea
                        placeholder="Agrega aquí cualquier instrucción especial..."
-                       className="min-h-[120px] bg-white border-black/10 focus:border-casita-terracotta focus:ring-casita-terracotta/10 rounded-xl p-4"
+                       className="min-h-[120px] bg-white border-black/10 focus:border-secondary focus:ring-secondary/10 rounded-xl p-4"
                        value={notes}
                        onChange={(e) => setNotes(e.target.value)}
                      />

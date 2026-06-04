@@ -69,26 +69,26 @@ const faqs = [
 
 export default function FAQPage() {
   return (
-    <div className="min-h-screen bg-casita-cream flex flex-col">
+    <div className="min-h-screen bg-surface flex flex-col">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-6 max-w-4xl mx-auto w-full">
         {/* Header Section */}
         <div className="flex flex-col items-center text-center gap-6 mb-20">
            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-casita-terracotta">Centro de Ayuda</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Centro de Ayuda</span>
            </div>
-           <h1 className="text-5xl md:text-6xl font-serif font-bold text-casita-charcoal">Preguntas Frecuentes</h1>
+           <h1 className="text-5xl md:text-6xl font-serif font-bold text-on-surface">Preguntas Frecuentes</h1>
            <p className="text-muted-foreground text-sm max-w-lg mt-2">
                Todo lo que necesitas saber sobre nuestros productos, envíos y pedidos.
            </p>
 
            <div className="relative w-full max-w-2xl group mt-8">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-casita-terracotta transition-colors" />
+              <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-secondary transition-colors" />
               <input
                 type="text"
                 placeholder="Buscar preguntas frecuentes"
-                className="w-full pl-14 pr-8 py-5 bg-white border border-black/5 rounded-none text-base focus:outline-none focus:ring-1 focus:ring-casita-terracotta transition-all shadow-sm"
+                className="w-full pl-14 pr-8 py-5 bg-white border border-black/5 rounded-none text-base focus:outline-none focus:ring-1 focus:ring-secondary transition-all shadow-sm"
               />
            </div>
         </div>
@@ -97,13 +97,13 @@ export default function FAQPage() {
         <div className="flex flex-col gap-16">
            {faqs.map((section) => (
               <div key={section.category} className="flex flex-col gap-6">
-                 <h2 className="text-2xl font-serif font-bold text-casita-olive mb-4">
+                 <h2 className="text-2xl font-serif font-bold text-primary mb-4">
                     {section.category}
                  </h2>
                  <Accordion type="single" collapsible className="w-full">
                     {section.questions.map((faq, index) => (
                        <AccordionItem key={index} value={`${section.category}-${index}`} className="border-b border-black/10">
-                          <AccordionTrigger className="text-left font-serif font-medium text-xl hover:text-casita-terracotta transition-colors py-8">
+                          <AccordionTrigger className="text-left font-serif font-medium text-xl hover:text-secondary transition-colors py-8">
                              {faq.q}
                           </AccordionTrigger>
                           <AccordionContent className="text-muted-foreground text-lg leading-relaxed pb-8">
@@ -118,19 +118,19 @@ export default function FAQPage() {
 
         {/* Contact Section */}
         <div className="mt-32 p-12 bg-white rounded-none border border-black/5 shadow-sm flex flex-col items-center text-center gap-8 relative overflow-hidden">
-           <div className="w-16 h-16 bg-casita-olive/10 rounded-full flex items-center justify-center text-casita-olive">
+           <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
               <MessageSquare className="h-8 w-8" />
            </div>
 
            <div className="flex flex-col gap-2">
-              <h3 className="text-3xl font-serif font-bold text-casita-charcoal">¿Aún tienes dudas?</h3>
+              <h3 className="text-3xl font-serif font-bold text-on-surface">¿Aún tienes dudas?</h3>
               <p className="text-muted-foreground text-sm max-w-sm">
                   Nuestro equipo está listo para ayudarte a elegir los mejores productos para tu ocasión especial.
               </p>
            </div>
 
            <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
-              <Button className="rounded-full h-12 px-8 bg-casita-charcoal hover:bg-casita-olive transition-all font-bold uppercase tracking-widest text-[10px] gap-2">
+              <Button className="rounded-full h-12 px-8 bg-on-surface hover:bg-primary transition-all font-bold uppercase tracking-widest text-[10px] gap-2">
                  <Mail className="h-4 w-4" /> Envíanos un correo
               </Button>
               <Button variant="outline" className="rounded-full h-12 px-8 border-black/10 font-bold uppercase tracking-widest text-[10px] gap-2">

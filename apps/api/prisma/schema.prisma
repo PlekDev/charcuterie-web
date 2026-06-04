@@ -1,0 +1,237 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== USUARIOS Y CAJEROS ====================
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      String   @default("cajero") // admin, cajero, supervisor
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  sales     Sale[]
+  sessions  CashSession[]
+}
+
+// ==================== UBICACIONES ====================
+
+model Location {
+  id          String   @id @default(cuid())
+  name        String   // "Almacén Central", "Casita Market", "Casita 2", "Restaurante"
+  type        String   // "almacen", "tienda", "restaurante"
+  address     String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  inventory   Inventory[]
+  sales       Sale[]
+  movements   Movement[] @relation("MovementFrom")
+  movementsTo Movement[] @relation("MovementTo")
+  sessions    CashSession[]
+}
+
+// ==================== PRODUCTOS ====================
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  color       String   @default("#6B7280")
+  icon        String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  products Product[]
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  barcode     String?  @unique
+  sku         String?  @unique
+  name        String
+  description String?
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  
+  // Precios
+  costPrice   Float    @default(0)  // Precio de costo
+  salePrice   Float    @default(0)  // Precio de venta
+  
+  // Medidas
+  unit        String   @default("pieza") // pieza, kg, litro, paquete
+  
+  // Imagen
+  imageUrl    String?
+  
+  // Estado
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  inventory   Inventory[]
+  saleItems   SaleItem[]
+  movements   MovementItem[]
+}
+
+// ==================== INVENTARIO ====================
+
+model Inventory {
+  id           String   @id @default(cuid())
+  productId    String
+  product      Product  @relation(fields: [productId], references: [id])
+  locationId   String
+  location     Location @relation(fields: [locationId], references: [id])
+  
+  quantity     Int      @default(0)
+  minStock     Int      @default(5)    // Alerta de stock mínimo
+  maxStock     Int      @default(100)  // Stock máximo
+  
+  // Fechas de caducidad (opcional)
+  expiryDate   DateTime?
+  batchNumber  String?
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@unique([productId, locationId])
+}
+
+// ==================== VENTAS ====================
+
+model Sale {
+  id            String   @id @default(cuid())
+  invoiceNumber String   @unique // F001, F002, etc.
+  
+  // Ubicación y cajero
+  locationId    String
+  location      Location @relation(fields: [locationId], references: [id])
+  cashierId     String
+  cashier       User     @relation(fields: [cashierId], references: [id])
+  sessionId     String?  // Sesión de caja
+  session       CashSession? @relation(fields: [sessionId], references: [id])
+  
+  // Montos
+  subtotal      Float    @default(0)
+  tax           Float    @default(0)
+  discount      Float    @default(0)
+  total         Float    @default(0)
+  
+  // Método de pago
+  paymentMethod String   @default("efectivo") // efectivo, tarjeta, transferencia, mixto
+  cashReceived  Float?   // Efectivo recibido
+  change        Float?   // Cambio
+  
+  // Estado
+  status        String   @default("completada") // pendiente, completada, cancelada
+  notes         String?
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  items         SaleItem[]
+}
+
+model SaleItem {
+  id            String   @id @default(cuid())
+  saleId        String
+  sale          Sale     @relation(fields: [saleId], references: [id])
+  productId     String
+  product       Product  @relation(fields: [productId], references: [id])
+  
+  quantity      Int      @default(1)
+  unitPrice     Float    // Precio al momento de la venta
+  costPrice     Float    // Costo al momento de la venta (para calcular ganancia)
+  discount      Float    @default(0)
+  subtotal      Float    @default(0)
+  
+  createdAt     DateTime @default(now())
+}
+
+// ==================== SESIONES DE CAJA (CORTES) ====================
+
+model CashSession {
+  id            String   @id @default(cuid())
+  
+  locationId    String
+  location      Location @relation(fields: [locationId], references: [id])
+  cashierId     String
+  cashier       User     @relation(fields: [cashierId], references: [id])
+  
+  // Apertura
+  openingCash   Float    @default(0)    // Efectivo inicial en caja
+  openedAt      DateTime @default(now())
+  
+  // Cierre
+  closingCash   Float?                   // Efectivo final en caja
+  expectedCash  Float?                   // Efectivo esperado
+  difference    Float?                   // Diferencia (sobrante/faltante)
+  closedAt      DateTime?
+  
+  // Resumen de ventas
+  totalSales    Float    @default(0)
+  totalCash     Float    @default(0)
+  totalCard     Float    @default(0)
+  totalTransfer Float    @default(0)
+  totalItems    Int      @default(0)
+  
+  // Estado
+  status        String   @default("abierta") // abierta, cerrada
+  
+  notes         String?
+  
+  sales         Sale[]
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// ==================== MOVIMIENTOS DE INVENTARIO ====================
+
+model Movement {
+  id            String   @id @default(cuid())
+  type          String   // entrada, salida, transferencia, ajuste
+  
+  fromLocationId String?
+  fromLocation   Location? @relation("MovementFrom", fields: [fromLocationId], references: [id])
+  toLocationId   String?
+  toLocation     Location? @relation("MovementTo", fields: [toLocationId], references: [id])
+  
+  reason        String?  // Motivo del movimiento
+  notes         String?
+  
+  userId        String   // Quién autoriza
+  status        String   @default("completado") // pendiente, completado, cancelado
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  items         MovementItem[]
+}
+
+model MovementItem {
+  id            String   @id @default(cuid())
+  movementId    String
+  movement      Movement @relation(fields: [movementId], references: [id])
+  productId     String
+  product       Product  @relation(fields: [productId], references: [id])
+  
+  quantity      Int      @default(1)
+  notes         String?
+  
+  createdAt     DateTime @default(now())
+}

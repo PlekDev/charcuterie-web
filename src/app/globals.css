@@ -1,0 +1,75 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-headline: var(--font-headline);
+  --font-body: var(--font-body);
+  --font-label: var(--font-label);
+
+  --color-background: #fcf9f4;
+  --color-surface: #fcf9f4;
+  --color-on-surface: #1c1c19;
+  --color-on-surface-variant: #414844;
+
+  --color-primary: #012d1d;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #1b4332;
+  --color-on-primary-container: #86af99;
+
+  --color-secondary: #7b5819;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #fdcd83;
+  --color-on-secondary-container: #785516;
+
+  --color-tertiary: #1b291f;
+  --color-on-tertiary: #ffffff;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+
+  --color-outline: #717973;
+  --color-outline-variant: #c1c8c2;
+
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f6f3ee;
+  --color-surface-container: #f0ede8;
+  --color-surface-container-high: #ebe8e3;
+  --color-surface-container-highest: #e5e2dd;
+
+  --color-primary-fixed: #c1ecd4;
+  --color-on-primary-fixed: #002114;
+  --color-primary-fixed-dim: #a5d0b9;
+
+  --color-secondary-fixed: #ffdeae;
+  --color-on-secondary-fixed: #281900;
+  --color-secondary-fixed-dim: #eebf76;
+}
+
+:root {
+  --background: #fcf9f4;
+  --foreground: #1c1c19;
+  --radius: 0.25rem;
+}
+
+@layer base {
+  * {
+    @apply border-outline-variant/20;
+  }
+  body {
+    @apply bg-background text-on-surface font-body selection:bg-primary-fixed-dim selection:text-primary;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline tracking-tight;
+  }
+}
+
+@layer utilities {
+  .editorial-shadow {
+    box-shadow: 0px 12px 32px rgba(28, 28, 25, 0.06);
+  }
+  .glass-nav {
+    @apply bg-surface/80 backdrop-blur-xl;
+  }
+}

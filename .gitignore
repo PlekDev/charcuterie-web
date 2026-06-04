@@ -1,0 +1,118 @@
+# ========================
+# Dependencies
+# ========================
+node_modules/
+.pnp
+.pnp.js
+
+# Bun
+bun.lockb
+*.bun
+
+# ========================
+# Build outputs
+# ========================
+dist/
+build/
+out/
+.output/
+
+# Next.js
+apps/web/.next/
+apps/web/out/
+
+# API / backend
+apps/api/dist/
+
+# ========================
+# Environment variables
+# ========================
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.staging
+.env.test
+
+# ========================
+# Logs
+# ========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bun-error.log*
+pnpm-debug.log*
+
+# ========================
+# OS
+# ========================
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ========================
+# IDE / Editors
+# ========================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+
+# ========================
+# Testing
+# ========================
+coverage/
+.nyc_output/
+*.lcov
+
+# ========================
+# Cache
+# ========================
+.cache/
+.parcel-cache/
+.turbo/
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+
+# ========================
+# Misc
+# ========================
+*.pem
+.vercel
+.netlify
+
+# ========================
+# Prisma
+# ========================
+prisma/migrations/
+# (quita esta línea si quieres versionar las migraciones — normalmente sí se suben)
+
+# ========================
+# Next.js
+# ========================
+.next/
+out/
+next-env.d.ts
+
+# ========================
+# Sharp (binarios nativos)
+# ========================
+node_modules/sharp/
+
+# ========================
+# TypeScript
+# ========================
+*.tsbuildinfo
+tsconfig.tsbuildinfo

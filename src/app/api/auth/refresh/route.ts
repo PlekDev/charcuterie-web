@@ -48,13 +48,18 @@ export async function POST(req: NextRequest) {
     if (!r) {
       return NextResponse.json({ error: 'No se pudo refrescar la sesion' }, { status: 401 })
     }
-
+    // return NextResponse.json({
     const res = NextResponse.json({
       accessToken: r.AccessToken,
       idToken: r.IdToken,
       expiresIn: r.ExpiresIn,
     })
-
+    
+//} catch (e) {
+    // Refresh token vencido/revocado -> limpia la cookie para forzar re-login.
+    //const res = cognitoErrorResponse(e)
+    //res.cookies.delete(REFRESH_COOKIE)
+    
     // Re-emite la cookie de role en cada refresh (~cada hora y en cada reload):
     // mantiene el gate fresco y aplica revocaciones de admin sin esperar 30 días.
     const sub = subFromIdToken(r.IdToken)

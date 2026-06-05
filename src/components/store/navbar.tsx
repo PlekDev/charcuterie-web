@@ -89,6 +89,26 @@ export function Navbar() {
               </span>
             )}
           </Link>
+
+          {/*<Link href="/orders" title="Mis Pedidos" className="p-2 hover:bg-stone-100/50 rounded-full transition-all active:scale-95 duration-150 text-primary">
+            <User className="w-5 h-5" />
+          </Link>
+          {authStatus === 'authenticated' ? (
+            <button
+              onClick={handleLogout}
+              title="Cerrar sesión"
+              className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-on-primary hover:bg-primary-container transition-all active:scale-95 duration-150 font-label text-[10px] uppercase tracking-[0.2em] font-semibold"
+            >
+              <LogOut className="w-4 h-4" />
+              Salir
+            </button>
+          ) : authStatus === 'unauthenticated' ? (
+            <Link href="/login" title="Iniciar sesión" className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-on-primary hover:bg-primary-container transition-all active:scale-95 duration-150 font-label text-[10px] uppercase tracking-[0.2em] font-semibold">
+              <LogIn className="w-4 h-4" />
+              Entrar
+            </Link>
+          ) : null}*/}
+          
           <DropdownMenu>
             <DropdownMenuTrigger
               title="Cuenta"

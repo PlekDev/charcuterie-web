@@ -75,6 +75,10 @@ function LoginForm() {
             seedErr instanceof Error ? seedErr.message : 'Reintenta en un momento.',
         })
       }
+      
+      // Autenticado en Cognito de todos modos: lo dejamos pasar.
+      //router.push('/')
+      
       // Respeta ?next= (p.ej. cuando el middleware de /admin mandó aquí). Solo
       // rutas internas para evitar open-redirect.
       const next = params.get('next')

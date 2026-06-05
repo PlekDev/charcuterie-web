@@ -71,8 +71,8 @@ export async function POST(req: NextRequest) {
       })
     }
 
-    // Cookie de role firmada para el gate server-side (middleware /admin).
-    // El role sale de chaputeria.users, NO de Cognito. httpOnly + firmada => no
+    // Cookie de role firmada para el gate server-side (middleware /admin). El
+    // role sale de chaputeria.users, NO de Cognito. httpOnly + firmada => no
     // falsificable desde el browser.
     const sub = subFromIdToken(r.IdToken)
     if (sub) {

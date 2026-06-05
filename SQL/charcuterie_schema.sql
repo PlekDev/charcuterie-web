@@ -481,7 +481,7 @@ CREATE POLICY suppliers_admin_all ON chaputeria.suppliers
     USING ((select chaputeria.is_admin()))
     WITH CHECK ((select chaputeria.is_admin()));
 
--- ---------- inventory_items (admin only) ---------- lo que yo tengo que trabajar ajá ajá :3
+-- ---------- inventory_items (admin only) ----------
 CREATE POLICY inventory_admin_all ON chaputeria.inventory_items
     FOR ALL TO authenticated
     USING ((select chaputeria.is_admin()))

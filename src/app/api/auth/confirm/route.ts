@@ -1,6 +1,5 @@
 // POST /api/auth/confirm — body { email, code }
-// El usuario pone el código que le llega por email.
-// Respuesta { ok: true }.
+// El usuario mete el codigo que le llego por email. Respuesta { ok: true }.
 
 import { NextRequest, NextResponse } from 'next/server'
 import { ConfirmSignUpCommand } from '@aws-sdk/client-cognito-identity-provider'

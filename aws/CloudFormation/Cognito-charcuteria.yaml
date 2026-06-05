@@ -109,7 +109,7 @@ Resources:
             MinLength: "0"
           Required: true
           Name: "phone_number"
-        - DeveloperOnlyAttribute: false
+        - DeveloperOnlyAttribute: false # ! diferencias 112-116
           Mutable: true
           AttributeDataType: "Boolean"
           Required: false

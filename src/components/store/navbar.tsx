@@ -2,16 +2,29 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
-import { ShoppingBasket, User, Menu, X } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
+import { ShoppingBasket, User, Menu, X, LogIn, LogOut } from 'lucide-react'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { useCartStore } from '@/store/cart-store'
+import { useAuthStore } from '@/store/auth-store'
 
 export function Navbar() {
   const pathname = usePathname()
+  const router = useRouter()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const cartCount = useCartStore((state) => state.items.reduce((acc, item) => acc + item.quantity, 0))
+
+  const authStatus = useAuthStore((s) => s.status)
+  const logout = useAuthStore((s) => s.logout)
+
+  const handleLogout = async () => {
+    await logout()
+    setMobileMenuOpen(false)
+    toast.success('Sesión cerrada')
+    router.push('/')
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,6 +83,21 @@ export function Navbar() {
           <Link href="/orders" title="Mis Pedidos" className="p-2 hover:bg-stone-100/50 rounded-full transition-all active:scale-95 duration-150 text-primary">
             <User className="w-5 h-5" />
           </Link>
+          {authStatus === 'authenticated' ? (
+            <button
+              onClick={handleLogout}
+              title="Cerrar sesión"
+              className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-on-primary hover:bg-primary-container transition-all active:scale-95 duration-150 font-label text-[10px] uppercase tracking-[0.2em] font-semibold"
+            >
+              <LogOut className="w-4 h-4" />
+              Salir
+            </button>
+          ) : authStatus === 'unauthenticated' ? (
+            <Link href="/login" title="Iniciar sesión" className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-on-primary hover:bg-primary-container transition-all active:scale-95 duration-150 font-label text-[10px] uppercase tracking-[0.2em] font-semibold">
+              <LogIn className="w-4 h-4" />
+              Entrar
+            </Link>
+          ) : null}
           <button
             className="md:hidden p-2 text-primary"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -98,6 +126,33 @@ export function Navbar() {
               </Link>
             )
           })}
+          <div className="border-t border-outline-variant/10 mt-2 pt-4 flex flex-col gap-4">
+            {authStatus === 'authenticated' ? (
+              <button
+                onClick={handleLogout}
+                className="text-left text-primary font-semibold"
+              >
+                Cerrar sesión
+              </button>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="text-primary font-semibold"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Iniciar sesión
+                </Link>
+                <Link
+                  href="/signup"
+                  className="text-on-surface-variant/60"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Crear cuenta
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       )}
     </header>

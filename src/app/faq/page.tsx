@@ -11,6 +11,8 @@ import {
 import { Search, Mail, Phone, MessageSquare } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
+// Preguntas frecuentes agrupadas por categoría. Contenido estático que
+// alimenta el acordeón de la página de ayuda.
 const faqs = [
     {
         category: 'Productos',

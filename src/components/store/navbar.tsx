@@ -17,24 +17,17 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
 
+// Barra de navegación superior (fija): enlaces de la tienda, contador del
+// carrito y menú responsivo para móvil.
 export function Navbar() {
   const pathname = usePathname()
   const router = useRouter()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  // Total de unidades en el carrito para mostrar el badge.
   const cartCount = useCartStore((state) => state.items.reduce((acc, item) => acc + item.quantity, 0))
 
-  const authStatus = useAuthStore((s) => s.status)
-  const email = useAuthStore((s) => s.email)
-  const logout = useAuthStore((s) => s.logout)
-
-  const handleLogout = async () => {
-    await logout()
-    setMobileMenuOpen(false)
-    toast.success('Sesión cerrada')
-    router.push('/')
-  }
-
+  // Cambia el estilo del navbar (efecto "glass") al hacer scroll.
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -43,6 +36,7 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Enlaces principales de la tienda.
   const navLinks = [
     { name: 'Catálogo', href: '/market' },
     { name: 'Quesos', href: '/menu' },

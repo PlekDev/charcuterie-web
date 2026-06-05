@@ -33,9 +33,6 @@ export const metadata: Metadata = {
     "Productos Artesanales"
   ],
   authors: [{ name: "Charcutería Gourmet" }],
-  icons: {
-    icon: "/logo.svg",
-  },
   openGraph: {
     title: "Charcutería Gourmet | Quesos y Embutidos Premium",
     description:

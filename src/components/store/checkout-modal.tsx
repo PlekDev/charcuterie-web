@@ -23,6 +23,8 @@ interface CheckoutModalProps {
   notes: string
 }
 
+// Modal de pago con tarjeta (simulado). Al enviar, crea el pedido en la API,
+// vacía el carrito y redirige a la confirmación.
 export function CheckoutModal({ isOpen, onClose, notes }: CheckoutModalProps) {
   const router = useRouter()
   const { items, getTotal, clearCart } = useCartStore()
@@ -39,6 +41,7 @@ export function CheckoutModal({ isOpen, onClose, notes }: CheckoutModalProps) {
   const shipping = subtotal > 500 ? 0 : 85
   const total = subtotal + shipping
 
+  // Procesa el "pago" y crea el pedido a partir de los items del carrito.
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)

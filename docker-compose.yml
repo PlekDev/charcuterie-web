@@ -34,12 +34,12 @@ services:
 
   cloudflared:
     image: cloudflare/cloudflared:latest
-    # El ingress (hostname {nombre}.uno21things.dev -> http://app:3000) se
-    # configura en el dashboard de Cloudflare Zero Trust. cloudflared lee
-    # TUNNEL_TOKEN del entorno automáticamente.
-    command: tunnel --no-autoupdate run
-    environment:
-      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    # Modo config-file (named tunnel gestionado por CLI, sin dashboard). Monta
+    # ~/.cloudflared del host (config.yml + credenciales <UUID>.json que generó
+    # 'cloudflared tunnel create'). El ingress vive en config.yml.
+    command: tunnel --no-autoupdate --config /etc/cloudflared/config.yml run
+    volumes:
+      - /home/ubuntu/.cloudflared:/etc/cloudflared:ro
     depends_on:
       app:
         condition: service_healthy

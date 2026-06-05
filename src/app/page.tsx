@@ -12,8 +12,10 @@ import { useState, useEffect } from 'react'
 export default function LandingPage() {
   const [featuredProducts, setFeaturedProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [isMounted, setIsMounted] = useState(false) // corrección hydration mismatch?
 
   useEffect(() => {
+    setIsMounted(true) // corrección hydration mismatch?
     const fetchFeatured = async () => {
       try {
         const res = await fetch('/api/products?visibleWeb=true')

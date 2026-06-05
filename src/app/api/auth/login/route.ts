@@ -14,6 +14,13 @@ import {
   cognitoErrorResponse,
   REFRESH_COOKIE,
 } from '@/lib/cognito-server'
+import { roleForCognitoSub } from '@/lib/supabase'
+import {
+  ROLE_COOKIE,
+  ROLE_COOKIE_MAX_AGE,
+  signRoleCookie,
+  subFromIdToken,
+} from '@/lib/admin-cookie'
 
 // Validez del refresh token (default del User Pool de Cognito: 30 días).
 const REFRESH_MAX_AGE = 60 * 60 * 24 * 30
@@ -61,6 +68,21 @@ export async function POST(req: NextRequest) {
         sameSite: 'lax',
         path: '/',
         maxAge: REFRESH_MAX_AGE,
+      })
+    }
+
+    // Cookie de role firmada para el gate server-side (middleware /admin). El
+    // role sale de chaputeria.users, NO de Cognito. httpOnly + firmada => no
+    // falsificable desde el browser.
+    const sub = subFromIdToken(r.IdToken)
+    if (sub) {
+      const role = await roleForCognitoSub(sub)
+      res.cookies.set(ROLE_COOKIE, await signRoleCookie(role, sub), {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        path: '/',
+        maxAge: ROLE_COOKIE_MAX_AGE,
       })
     }
 

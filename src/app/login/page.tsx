@@ -75,8 +75,15 @@ function LoginForm() {
             seedErr instanceof Error ? seedErr.message : 'Reintenta en un momento.',
         })
       }
+      
       // Autenticado en Cognito de todos modos: lo dejamos pasar.
-      router.push('/')
+      //router.push('/')
+      
+      // Respeta ?next= (p.ej. cuando el middleware de /admin mandó aquí). Solo
+      // rutas internas para evitar open-redirect.
+      const next = params.get('next')
+      const dest = next && next.startsWith('/') && !next.startsWith('//') ? next : '/'
+      router.push(dest)
     } catch (err) {
       toast.error('Error al iniciar sesión', {
         description: err instanceof Error ? err.message : undefined,

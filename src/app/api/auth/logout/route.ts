@@ -8,9 +8,11 @@
 
 import { NextResponse } from 'next/server'
 import { REFRESH_COOKIE } from '@/lib/cognito-server'
+import { ROLE_COOKIE } from '@/lib/admin-cookie'
 
 export async function POST() {
   const res = NextResponse.json({ ok: true })
   res.cookies.delete(REFRESH_COOKIE)
+  res.cookies.delete(ROLE_COOKIE)
   return res
 }

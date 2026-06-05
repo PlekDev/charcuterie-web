@@ -13,6 +13,13 @@ import {
   cognitoErrorResponse,
   REFRESH_COOKIE,
 } from '@/lib/cognito-server'
+import { roleForCognitoSub } from '@/lib/supabase'
+import {
+  ROLE_COOKIE,
+  ROLE_COOKIE_MAX_AGE,
+  signRoleCookie,
+  subFromIdToken,
+} from '@/lib/admin-cookie'
 
 export async function POST(req: NextRequest) {
   const { email } = await req.json().catch(() => ({}))
@@ -41,16 +48,38 @@ export async function POST(req: NextRequest) {
     if (!r) {
       return NextResponse.json({ error: 'No se pudo refrescar la sesion' }, { status: 401 })
     }
-
-    return NextResponse.json({
+    // return NextResponse.json({
+    const res = NextResponse.json({
       accessToken: r.AccessToken,
       idToken: r.IdToken,
       expiresIn: r.ExpiresIn,
     })
-  } catch (e) {
+    
+//} catch (e) {
     // Refresh token vencido/revocado -> limpia la cookie para forzar re-login.
+    //const res = cognitoErrorResponse(e)
+    //res.cookies.delete(REFRESH_COOKIE)
+    
+    // Re-emite la cookie de role en cada refresh (~cada hora y en cada reload):
+    // mantiene el gate fresco y aplica revocaciones de admin sin esperar 30 días.
+    const sub = subFromIdToken(r.IdToken)
+    if (sub) {
+      const role = await roleForCognitoSub(sub)
+      res.cookies.set(ROLE_COOKIE, await signRoleCookie(role, sub), {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        path: '/',
+        maxAge: ROLE_COOKIE_MAX_AGE,
+      })
+    }
+
+    return res
+  } catch (e) {
+    // Refresh token vencido/revocado -> limpia las cookies para forzar re-login.
     const res = cognitoErrorResponse(e)
     res.cookies.delete(REFRESH_COOKIE)
+    res.cookies.delete(ROLE_COOKIE)
     return res
   }
 }

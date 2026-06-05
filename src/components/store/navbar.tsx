@@ -3,11 +3,19 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { ShoppingBasket, User, Menu, X, LogIn, LogOut } from 'lucide-react'
+import { ShoppingBasket, User, Menu, X, LogIn, LogOut, Package, UserCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { useCartStore } from '@/store/cart-store'
 import { useAuthStore } from '@/store/auth-store'
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu'
 
 export function Navbar() {
   const pathname = usePathname()
@@ -17,6 +25,7 @@ export function Navbar() {
   const cartCount = useCartStore((state) => state.items.reduce((acc, item) => acc + item.quantity, 0))
 
   const authStatus = useAuthStore((s) => s.status)
+  const email = useAuthStore((s) => s.email)
   const logout = useAuthStore((s) => s.logout)
 
   const handleLogout = async () => {
@@ -80,7 +89,8 @@ export function Navbar() {
               </span>
             )}
           </Link>
-          <Link href="/orders" title="Mis Pedidos" className="p-2 hover:bg-stone-100/50 rounded-full transition-all active:scale-95 duration-150 text-primary">
+
+          {/*<Link href="/orders" title="Mis Pedidos" className="p-2 hover:bg-stone-100/50 rounded-full transition-all active:scale-95 duration-150 text-primary">
             <User className="w-5 h-5" />
           </Link>
           {authStatus === 'authenticated' ? (
@@ -97,7 +107,52 @@ export function Navbar() {
               <LogIn className="w-4 h-4" />
               Entrar
             </Link>
-          ) : null}
+          ) : null}*/}
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              title="Cuenta"
+              className="p-2 hover:bg-stone-100/50 rounded-full transition-all active:scale-95 duration-150 text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            >
+              <User className="w-5 h-5" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              {authStatus === 'authenticated' ? (
+                <>
+                  <DropdownMenuLabel className="truncate font-normal text-on-surface-variant/60">
+                    {email ?? 'Mi cuenta'}
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/orders" className="cursor-pointer">
+                      <Package className="mr-2 h-4 w-4" />
+                      Mis pedidos
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-destructive focus:text-destructive">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Cerrar sesión
+                  </DropdownMenuItem>
+                </>
+              ) : (
+                <>
+                  <DropdownMenuItem asChild>
+                    <Link href="/login" className="cursor-pointer">
+                      <LogIn className="mr-2 h-4 w-4" />
+                      Iniciar sesión
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/signup" className="cursor-pointer">
+                      <UserCircle className="mr-2 h-4 w-4" />
+                      Crear cuenta
+                    </Link>
+                  </DropdownMenuItem>
+                </>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
           <button
             className="md:hidden p-2 text-primary"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

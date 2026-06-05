@@ -21,8 +21,6 @@ import { cn } from '@/lib/utils'
 import { useCartStore } from '@/store/cart-store'
 import { toast } from 'sonner'
 
-// Página de detalle de un producto: galería, info, selector de cantidad,
-// botón para agregar al carrito y recomendaciones de la misma categoría.
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const [product, setProduct] = useState<any>(null)
@@ -32,7 +30,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const [selectedImage, setSelectedImage] = useState(0)
   const addItem = useCartStore((state) => state.addItem)
 
-  // Carga el producto por id y, si tiene categoría, sus recomendaciones.
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,7 +73,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const stock = product.stock_actual || 0
   const isOutOfStock = stock <= 0
 
-  // Agrega el producto al carrito con la cantidad elegida y avisa al usuario.
   const handleAddToCart = () => {
     if (!product) return
     addItem({

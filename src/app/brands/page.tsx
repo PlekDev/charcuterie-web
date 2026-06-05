@@ -3,8 +3,6 @@ import { Footer } from '@/components/store/footer'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
-// Lista estática de proveedores/marcas que se muestran en la página
-// "Nosotros". Cada uno enlaza al market filtrado por su nombre.
 const brands = [
     {
         name: 'Quesos Selectos de Jalisco',

@@ -9,14 +9,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
-// Página de inicio (landing): hero, categorías y una sección de
-// productos destacados que se traen desde la API.
 export default function LandingPage() {
   const [featuredProducts, setFeaturedProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [isMounted, setIsMounted] = useState(false) // corrección hydration mismatch?
 
-  // Al montar, pedimos los productos visibles y mostramos los primeros 4.
   useEffect(() => {
     setIsMounted(true) // corrección hydration mismatch?
     const fetchFeatured = async () => {

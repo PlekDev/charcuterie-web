@@ -14,15 +14,12 @@ import {
   type OrderStatus,
 } from '@/lib/order-status'
 
-// Página de confirmación/detalle de un pedido: muestra los productos, el
-// total y permite avanzar o cancelar el estado (gestión demo, sin admin).
 export default function OrderConfirmationPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const [order, setOrder] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [updating, setUpdating] = useState(false)
 
-  // Trae el pedido por id desde la API.
   const fetchOrder = async () => {
     try {
       const res = await fetch(`/api/orders/${id}`)
@@ -40,7 +37,6 @@ export default function OrderConfirmationPage({ params }: { params: Promise<{ id
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
-  // Actualiza el estado del pedido (PATCH) y refresca la vista.
   const changeStatus = async (status: OrderStatus) => {
     setUpdating(true)
     try {

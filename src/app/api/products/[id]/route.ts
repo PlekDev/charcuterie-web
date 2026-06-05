@@ -3,7 +3,6 @@ import { supabase, supabaseAdmin, mapProduct, type SupabaseProduct } from '@/lib
 
 const PRODUCT_COLUMNS = 'id, name, description, price, category, available, image_url, created_at'
 
-// GET - Obtener el detalle de un producto por su id.
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

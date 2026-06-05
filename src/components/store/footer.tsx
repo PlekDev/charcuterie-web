@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { Globe, Mail } from 'lucide-react'
 
-// Pie de página común a toda la tienda: marca, enlaces y redes.
 export function Footer() {
   return (
       <footer className="w-full mt-auto bg-surface-container-low border-t border-outline-variant/10">

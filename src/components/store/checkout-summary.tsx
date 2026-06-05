@@ -12,13 +12,10 @@ interface CheckoutSummaryProps {
   notes?: string
 }
 
-// Resumen del pedido (columna lateral del carrito): lista los productos,
-// calcula el total y abre el modal de pago.
 export function CheckoutSummary({ notes = '' }: CheckoutSummaryProps) {
   const { items, getTotal } = useCartStore()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Envío gratis a partir de $500; si no, se cobra una tarifa fija de $85.
   const subtotal = getTotal()
   const shipping = subtotal > 500 ? 0 : 85
   const total = subtotal + shipping

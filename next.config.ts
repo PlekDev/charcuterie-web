@@ -47,13 +47,6 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
       },
-      {
-        // Imágenes de productos guardadas en Supabase Storage.
-        // El `**` cubre el subdominio del proyecto en cualquier entorno.
-        protocol: 'https',
-        hostname: '**.supabase.co',
-        pathname: '/storage/v1/object/public/**',
-      },
     ],
   },
 };

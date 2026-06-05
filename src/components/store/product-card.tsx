@@ -17,12 +17,9 @@ interface ProductCardProps {
   imageUrl?: string | null
 }
 
-// Tarjeta de producto reutilizable (catálogo, landing, recomendaciones).
-// Enlaza al detalle y tiene un botón rápido para agregar al carrito.
 export function ProductCard({ id, name, price, category, stock, imageUrl }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem)
 
-  // Agrega 1 unidad al carrito sin navegar al detalle (evita el Link padre).
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()

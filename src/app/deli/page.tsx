@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 
-// Categorías destacadas del deli (contenido estático de presentación).
 const deliCategories = [
   {
     title: 'Nuestros Quesos',
@@ -32,8 +31,6 @@ const deliCategories = [
   }
 ]
 
-// Página "Tablas Gourmet" (deli): muestra las categorías y bloques
-// promocionales. Es estática, no consume la API.
 export default function DeliPage() {
   return (
     <div className="min-h-screen bg-surface flex flex-col">

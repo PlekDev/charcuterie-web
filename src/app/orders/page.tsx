@@ -8,13 +8,10 @@ import { Button } from '@/components/ui/button'
 import { Package, ChevronRight, Loader2 } from 'lucide-react'
 import { ORDER_STATUS_LABELS, type OrderStatus } from '@/lib/order-status'
 
-// Página de historial: lista los pedidos del usuario (por ahora el usuario
-// demo) trayéndolos desde la API.
 export default function OrdersHistoryPage() {
   const [orders, setOrders] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
-  // Cargamos el historial de pedidos al montar la página.
   useEffect(() => {
     const fetchOrders = async () => {
       try {

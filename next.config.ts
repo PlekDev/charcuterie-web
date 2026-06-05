@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Empaqueta un servidor autocontenido en .next/standalone para una imagen
+  // Docker liviana (no requiere node_modules en runtime).
+  output: 'standalone',
   typescript: {
     ignoreBuildErrors: true,
   },

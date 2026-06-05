@@ -8,6 +8,8 @@ import { Search, SlidersHorizontal, ChevronDown, LayoutGrid, List } from 'lucide
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
+// Página de catálogo (market): lista los productos con buscador y
+// filtros por categoría. Los datos vienen de la API.
 export default function MarketPage() {
   const [products, setProducts] = useState<any[]>([])
   const [categories, setCategories] = useState<any[]>([])
@@ -16,6 +18,7 @@ export default function MarketPage() {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null)
   const [showFilters, setShowFilters] = useState(false)
 
+  // Traemos productos y categorías en paralelo al cargar la página.
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,6 +42,7 @@ export default function MarketPage() {
     fetchData()
   }, [])
 
+  // Filtrado en cliente por texto de búsqueda y categoría seleccionada.
   const filteredProducts = products.filter(p => {
     const matchesSearch = p.nombre.toLowerCase().includes(search.toLowerCase())
     const matchesCategory = !selectedCategory || p.categoria_id === selectedCategory

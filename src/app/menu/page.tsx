@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
 
+// Datos estáticos del menú de quesos (no vienen de la BD): se muestran
+// como carta dividida en secciones.
 const menuSections = [
     {
         title: 'Quesos Maduros',

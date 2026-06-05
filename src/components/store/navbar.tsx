@@ -7,12 +7,16 @@ import { ShoppingBasket, User, Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useCartStore } from '@/store/cart-store'
 
+// Barra de navegación superior (fija): enlaces de la tienda, contador del
+// carrito y menú responsivo para móvil.
 export function Navbar() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  // Total de unidades en el carrito para mostrar el badge.
   const cartCount = useCartStore((state) => state.items.reduce((acc, item) => acc + item.quantity, 0))
 
+  // Cambia el estilo del navbar (efecto "glass") al hacer scroll.
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -21,6 +25,7 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Enlaces principales de la tienda.
   const navLinks = [
     { name: 'Catálogo', href: '/market' },
     { name: 'Quesos', href: '/menu' },

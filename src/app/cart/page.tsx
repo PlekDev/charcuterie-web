@@ -20,9 +20,11 @@ import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import { Textarea } from '@/components/ui/textarea'
 
+// Página del carrito: muestra los productos agregados, permite ajustar
+// cantidades / quitarlos y pasar al resumen de compra (checkout).
 export default function CartPage() {
   const { items, removeItem, updateQuantity, clearCart } = useCartStore()
-  const [notes, setNotes] = useState('')
+  const [notes, setNotes] = useState('') // notas/instrucciones para el pedido
 
   return (
     <div className="min-h-screen bg-surface flex flex-col">

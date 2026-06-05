@@ -29,6 +29,37 @@ export const supabaseAdmin = serviceRoleKey
     })
   : null
 
+// Lee el role real del usuario por su cognito_id (server-only: usa service_role,
+// salta RLS). Lo usan los route handlers de auth para firmar la cookie de role.
+// Falla cerrado: ante error, sin fila, o sin service_role -> 'customer'.
+export async function roleForCognitoSub(sub: string): Promise<'customer' | 'admin'> {
+  if (!supabaseAdmin) {
+    console.warn('roleForCognitoSub: falta SUPABASE_SERVICE_ROLE_KEY; asumiendo customer')
+    return 'customer'
+  }
+  const { data, error } = await supabaseAdmin
+    .from('users')
+    .select('role')
+    .eq('cognito_id', sub)
+    .maybeSingle()
+  if (error || !data) return 'customer'
+  return (data as { role?: string }).role === 'admin' ? 'admin' : 'customer'
+}
+
+// Devuelve el id de chaputeria.users para un sub de Cognito, o null si no existe.
+// Server-only (service_role). Lo usa /api/orders para atribuir pedidos al usuario
+// logueado en vez del demo.
+export async function userIdForCognitoSub(sub: string): Promise<string | null> {
+  if (!supabaseAdmin) return null
+  const { data, error } = await supabaseAdmin
+    .from('users')
+    .select('id')
+    .eq('cognito_id', sub)
+    .maybeSingle()
+  if (error || !data) return null
+  return (data as { id: string }).id
+}
+
 // Forma de una fila de chaputeria.products
 export type SupabaseProduct = {
   id: string

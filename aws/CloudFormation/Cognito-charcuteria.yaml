@@ -107,13 +107,8 @@ Resources:
           StringAttributeConstraints:
             MaxLength: "2048"
             MinLength: "0"
-          Required: true
-          Name: "phone_number"
-        - DeveloperOnlyAttribute: false
-          Mutable: true
-          AttributeDataType: "Boolean"
           Required: false
-          Name: "phone_number_verified"
+          Name: "phone_number"
         - DeveloperOnlyAttribute: false
           Mutable: true
           AttributeDataType: "String"
@@ -207,7 +202,8 @@ Resources:
         PreTokenGenerationConfig:
           LambdaArn: "arn:aws:lambda:us-west-2:211125343245:function:cognito-pre-token-generation-Charcuteria"
           LambdaVersion: "V2_0"
-      UsernameAttributes: []
+      UsernameAttributes:
+        - "email"
       AutoVerifiedAttributes:
         - "email"
         - "phone_number"

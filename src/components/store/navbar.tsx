@@ -2,15 +2,26 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
-import { ShoppingBasket, User, Menu, X } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
+import { ShoppingBasket, User, Menu, X, LogIn, LogOut, Package, UserCircle } from 'lucide-react'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { useCartStore } from '@/store/cart-store'
+import { useAuthStore } from '@/store/auth-store'
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu'
 
 // Barra de navegación superior (fija): enlaces de la tienda, contador del
 // carrito y menú responsivo para móvil.
 export function Navbar() {
   const pathname = usePathname()
+  const router = useRouter()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   // Total de unidades en el carrito para mostrar el badge.
@@ -72,9 +83,70 @@ export function Navbar() {
               </span>
             )}
           </Link>
-          <Link href="/orders" title="Mis Pedidos" className="p-2 hover:bg-stone-100/50 rounded-full transition-all active:scale-95 duration-150 text-primary">
+
+          {/*<Link href="/orders" title="Mis Pedidos" className="p-2 hover:bg-stone-100/50 rounded-full transition-all active:scale-95 duration-150 text-primary">
             <User className="w-5 h-5" />
           </Link>
+          {authStatus === 'authenticated' ? (
+            <button
+              onClick={handleLogout}
+              title="Cerrar sesión"
+              className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-on-primary hover:bg-primary-container transition-all active:scale-95 duration-150 font-label text-[10px] uppercase tracking-[0.2em] font-semibold"
+            >
+              <LogOut className="w-4 h-4" />
+              Salir
+            </button>
+          ) : authStatus === 'unauthenticated' ? (
+            <Link href="/login" title="Iniciar sesión" className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-on-primary hover:bg-primary-container transition-all active:scale-95 duration-150 font-label text-[10px] uppercase tracking-[0.2em] font-semibold">
+              <LogIn className="w-4 h-4" />
+              Entrar
+            </Link>
+          ) : null}*/}
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              title="Cuenta"
+              className="p-2 hover:bg-stone-100/50 rounded-full transition-all active:scale-95 duration-150 text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            >
+              <User className="w-5 h-5" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              {authStatus === 'authenticated' ? (
+                <>
+                  <DropdownMenuLabel className="truncate font-normal text-on-surface-variant/60">
+                    {email ?? 'Mi cuenta'}
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/orders" className="cursor-pointer">
+                      <Package className="mr-2 h-4 w-4" />
+                      Mis pedidos
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-destructive focus:text-destructive">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Cerrar sesión
+                  </DropdownMenuItem>
+                </>
+              ) : (
+                <>
+                  <DropdownMenuItem asChild>
+                    <Link href="/login" className="cursor-pointer">
+                      <LogIn className="mr-2 h-4 w-4" />
+                      Iniciar sesión
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/signup" className="cursor-pointer">
+                      <UserCircle className="mr-2 h-4 w-4" />
+                      Crear cuenta
+                    </Link>
+                  </DropdownMenuItem>
+                </>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
           <button
             className="md:hidden p-2 text-primary"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -103,6 +175,33 @@ export function Navbar() {
               </Link>
             )
           })}
+          <div className="border-t border-outline-variant/10 mt-2 pt-4 flex flex-col gap-4">
+            {authStatus === 'authenticated' ? (
+              <button
+                onClick={handleLogout}
+                className="text-left text-primary font-semibold"
+              >
+                Cerrar sesión
+              </button>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="text-primary font-semibold"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Iniciar sesión
+                </Link>
+                <Link
+                  href="/signup"
+                  className="text-on-surface-variant/60"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Crear cuenta
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       )}
     </header>

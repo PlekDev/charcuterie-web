@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Newsreader, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { SessionInit } from "@/components/auth/session-init";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-body",
@@ -51,6 +52,7 @@ export default function RootLayout({
       <body
         className={`${plusJakarta.variable} ${newsreader.variable} ${inter.variable} antialiased bg-background text-foreground`}
       >
+        <SessionInit />
         {children}
         <Toaster position="top-right" />
       </body>

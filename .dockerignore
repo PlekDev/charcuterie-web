@@ -1,0 +1,21 @@
+node_modules
+.next
+dist
+.git
+.gitignore
+npm-debug.log*
+
+# Secrets: NO entran al contexto de build. Las NEXT_PUBLIC_* van por build args
+# y los secrets de runtime por env_file en docker-compose.
+.env
+.env.local
+.env.*.local
+
+# No se necesitan en la imagen
+Dockerfile
+.dockerignore
+docker-compose.yml
+README.md
+ARCHITECTURE.md
+.idea
+.vscode

@@ -1,0 +1,46 @@
+# Dos servicios: la app Next.js y el túnel de Cloudflare.
+#
+# Levantar (lee .env.local para interpolación Y para los secrets de runtime):
+#   docker compose --env-file .env.local up -d --build
+#
+# El --env-file es necesario porque compose, por defecto, interpola ${VAR} desde
+# un archivo .env, no .env.local. Con --env-file resuelve los build args y el
+# TUNNEL_TOKEN desde .env.local.
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        # Públicas, se inlinean en el bundle en build.
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    # Secrets + config de runtime (COGNITO_*, SUPABASE_SERVICE_ROLE_KEY) se
+    # inyectan al contenedor desde .env.local. NUNCA quedan en la imagen.
+    env_file:
+      - .env.local
+    environment:
+      - NODE_ENV=production
+    # No publicamos puerto al host: solo cloudflared lo alcanza por la red interna.
+    expose:
+      - "3000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    # Modo config-file (named tunnel gestionado por CLI, sin dashboard). Monta
+    # ~/.cloudflared del host (config.yml + credenciales <UUID>.json que generó
+    # 'cloudflared tunnel create'). El ingress vive en config.yml.
+    command: tunnel --no-autoupdate --config /etc/cloudflared/config.yml run
+    volumes:
+      - /home/ubuntu/.cloudflared:/etc/cloudflared:ro
+    depends_on:
+      app:
+        condition: service_healthy
+    restart: unless-stopped

@@ -1,15 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { supabaseAdmin, userIdForCognitoSub } from '@/lib/supabase'
 import { ensureDemoUser } from '@/lib/orders'
+import { ROLE_COOKIE, verifyRoleCookie } from '@/lib/admin-cookie'
 
-// GET - Historial de pedidos (del usuario demo por ahora)
-export async function GET() {
+// GET - Historial de pedidos del usuario LOGUEADO (sub de la cookie de role).
+// Sin sesión -> lista vacía (no exponemos pedidos de otros, ni del demo).
+export async function GET(req: NextRequest) {
   try {
     if (!supabaseAdmin) {
       return NextResponse.json({ success: false, error: 'Falta SUPABASE_SERVICE_ROLE_KEY' }, { status: 500 })
     }
 
-    const userId = await ensureDemoUser()
+    const session = await verifyRoleCookie(req.cookies.get(ROLE_COOKIE)?.value)
+    const userId = session ? await userIdForCognitoSub(session.sub) : null
+    if (!userId) {
+      return NextResponse.json({ success: true, data: [] })
+    }
 
     const { data, error } = await supabaseAdmin
       .from('orders')
@@ -54,7 +60,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'El carrito está vacío' }, { status: 400 })
     }
 
-    const userId = await ensureDemoUser()
+    // Atribuye el pedido al usuario logueado; si no hay sesión, al demo (checkout anónimo).
+    const session = await verifyRoleCookie(request.cookies.get(ROLE_COOKIE)?.value)
+    const userId = (session && (await userIdForCognitoSub(session.sub))) || (await ensureDemoUser())
 
     // 1. Crear el pedido (total arranca en 0 por trigger; estado 'pending')
     const { data: order, error: orderErr } = await supabaseAdmin

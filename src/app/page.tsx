@@ -67,7 +67,7 @@ export default function LandingPage() {
                   alt="Artisanal food board"
                   fill
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQtc1rI07tQiomRPEPzjcWkaSJ2OVh-IvtgkMqgITiTT2d9JhdJg4rRhG8ID7a4y-U6pRqCBiWzugprqfqXVp7QArwqz6yAOuGrODYt3amyiNBDFRUByOniqPmlMUYTKQhluEmMysDTH3NYIlAmyj-u1lH_KbAg3uWhfhTjt_Yf5Ak-P4AuLeog7iO7iNuTxKjmWYic5n6Ec6ceUO09j2jEe89ktXK2zKEMBCIybFox6GB9G6rnQKgKSnKdcrKi4BmgTX7fmQdZsGW"
+                  src="https://rrwoycsdxiaaesifzwut.supabase.co/storage/v1/object/public/productos_fotos/home_main.jpeg"
                 />
                 <div className="absolute inset-0 bg-primary/5"></div>
               </div>
@@ -101,7 +101,7 @@ export default function LandingPage() {
                   alt="Dairy products"
                   fill
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2JGmdzslc-r7YcjgCgnbqrHtND0DzBcB4V_MqecvXi6J1nQrJbTJKmtMSnfizD6f0TJv31PJRTx78EYbL1hCpjR_NI1RtSRGEs2HZNwufSHVc_PHfxdoxAcREzd97-I5EaulmHzWBW4vfzRzZvNlzri3_jkIMcRLvZA3jVpAC-fHc8H1OAbKPd8KRWqi0iUBOd5rmYEte7EhFE_jwsXIQb_JWgded2_aScQCKuFWRo-VinlCci-J4QQ5hs4ScyZyNmWI2nudZljfw"
+                  src="https://rrwoycsdxiaaesifzwut.supabase.co/storage/v1/object/public/productos_fotos/home_quesos.jpeg"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-8">
@@ -118,7 +118,7 @@ export default function LandingPage() {
                   alt="Charcuterie"
                   fill
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp2BIWiCeGiTFpptkutV6yYVe_jXdlaWER2RBkwiocLFGFNw3F3Jvm0NWbl0TzbwhQoJV5BEtH8LB-SNoC5VPXE9rA8oVFXNWCf3xX3CYi3BmrxWUCS5K_31vQTGUInCsaXIpIWaY15IhJWpiV56Zwjc5b14TZfJn_VyXnAYUEjV7Acjo9yq9qgNZiL5sjU8FcXLprPEWQtehsyV_yIVTpk9OgkIcF8j5eXLB92TuVcZaVOIYsH5jpLP0ldrkcktVM15G9ENFAW9Wf"
+                  src="https://rrwoycsdxiaaesifzwut.supabase.co/storage/v1/object/public/productos_fotos/home_carnes.jpeg"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-8">
@@ -134,7 +134,7 @@ export default function LandingPage() {
                   alt="Bakery"
                   fill
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxbYrPEs4o0-k3MfpaVvEcc8UhpqnXlBH5k2Hm59OfiYOhZ4WkR9C_Bfl2pdM-sUSgthDnoORZdSaXm7BSinp2Di5NA4KBV0DreOTn4vQXOcGkv4YPYJNMFNFWDUq0ez8VtqeCB8DNieCQ5FqTRQa9aJ55XFmT9AkYbhAnPrEmozux9FSGBYW9MscW-XexdCQXoDwJsTGJyNtqQiNaak--5JvXUSSAj0OAa64dCS1WS5A_wkE1SsCKSLKBE24sTvxvqs69jXGAHa__"
+                  src="https://rrwoycsdxiaaesifzwut.supabase.co/storage/v1/object/public/productos_fotos/home_tablasgourmet.jpeg"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-8">
@@ -158,7 +158,7 @@ export default function LandingPage() {
                   alt="Featured Product"
                   fill
                   className="w-full h-full object-contain mix-blend-multiply p-12"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv88QPySw2yctc2yoRPwwztU6euplBk2nuY7M2xpiQoED_9rLZT0qhuTB1RKyGNK1oQuH7odXdVxQaJn6UAqktWrtw2f956ivlu2fKOMu8pNiLCgY2NNNQLuelaiUxlMhJDA-IIXUqXkKikYxx9xo1pFS0-SBoN0DuPKC6eSZpNNO__d3rBq3wv-qizFyzA3ytf8IcwTBsEbLWrTzYOKiiKcFbiAelfqdExduwcUcV8HTByvNne1V2neuY7N2NO9F95aEK5-CZRGYf"
+                  src="https://rrwoycsdxiaaesifzwut.supabase.co/storage/v1/object/public/productos_fotos/home_jamonreserva.jpeg"
                 />
               </div>
             </div>
@@ -222,25 +222,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Newsletter Section */}
-        <section className="bg-primary py-24 px-8 text-center text-on-primary">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="font-headline italic text-4xl md:text-5xl mb-6">Recibe Novedades</h2>
-            <p className="font-body text-on-primary-container mb-12 opacity-90 leading-relaxed">
-              Suscríbete para recibir promociones, nuevos productos y recomendaciones especiales.
-            </p>
-            <form className="flex flex-col sm:flex-row gap-4">
-              <input
-                className="flex-1 bg-primary-container/50 border border-on-primary-container/20 rounded-lg px-6 py-4 font-body text-on-primary placeholder:text-on-primary-container focus:outline-none focus:ring-2 focus:ring-primary-fixed-dim transition-all"
-                placeholder="Tu correo electrónico"
-                type="email"
-              />
-              <Button className="bg-primary-fixed text-on-primary-fixed px-8 py-7 rounded-lg font-label text-xs uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-all h-auto">
-                Suscribirse
-              </Button>
-            </form>
-          </div>
-        </section>
       </main>
 
       <Footer />

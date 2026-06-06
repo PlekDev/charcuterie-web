@@ -398,7 +398,7 @@ export default function ProductosPage() {
               <Textarea id="description" rows={2} value={form.description} onChange={setField('description')} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="image_url">File Asset URL (Supabase Storage)</Label>
+              <Label htmlFor="image_url">URL de la Imagen</Label>
               <Input id="image_url" value={form.image_url} onChange={setField('image_url')} />
             </div>
 

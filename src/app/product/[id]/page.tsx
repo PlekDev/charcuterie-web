@@ -118,20 +118,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   )}
                </div>
                {/* Thumbnail placeholder */}
-               <div className="grid grid-cols-4 gap-4">
-                  {[0,1,2,3].map(i => (
-                     <button
-                       key={i}
-                       className={cn(
-                         "aspect-square bg-white rounded-lg border overflow-hidden transition-all",
-                         selectedImage === i ? "border-secondary ring-2 ring-secondary/10" : "border-black/5 opacity-60 hover:opacity-100"
-                       )}
-                       onClick={() => setSelectedImage(i)}
-                     >
-                        <div className="w-full h-full flex items-center justify-center text-[10px] italic text-muted-foreground">Vista {i+1}</div>
-                     </button>
-                  ))}
-               </div>
             </div>
 
             {/* Product Details */}
